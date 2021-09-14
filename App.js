@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Text, View, StyleSheet, Image, TextInput, ScrollView, Button } from 'react-native';
+import { Text, View, StyleSheet, Image, TextInput, ScrollView, Button, SafeAreaView } from 'react-native';
 
 const getFullName = (firstName, lastName) =>{
   return firstName + ' ' + lastName;
@@ -23,9 +23,28 @@ const Cat = (props) => {
   );
 }
 
+const PizzaTranslator = () => {
+  const [text, setText] = useState('');
+  return (
+    <View>
+      <TextInput
+        style={styles.viewPizza}
+        placeholder="Type here to translate!"
+        onChangeText={text => setText(text)}
+        defaultValue={text}
+      />
+      <Text>
+        {text.split(' ').map((word) => word && '🍕').join(' ')}
+      </Text>
+    </View>
+  );
+}
+
+
+
 const App = () => {
   return (
-    <>
+    <SafeAreaView>
       <ScrollView>
         <Text>Some text</Text>
         <Text>Some more text</Text>
@@ -40,8 +59,9 @@ const App = () => {
         <Text>Hello, I am {getFullName("Tinh","Nguyen")}</Text>
         <Cat name="Munkustrap" />
         <Cat name="Spot" />
+        <PizzaTranslator />
       </ScrollView>
-    </>
+    </SafeAreaView>
   );
 }
 
@@ -55,6 +75,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: 5,
     paddingHorizontal: 5,
+    marginVertical: 5,
+  },
+  viewPizza:{
+    height: 40,
+    borderWidth: 1,
+    borderColor: 'grey',
+    marginHorizontal: 5,
+    padding: 5,
     marginVertical: 5,
   }
 })
